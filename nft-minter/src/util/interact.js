@@ -6,6 +6,11 @@ const contractAddress = "0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
+//--------------
+var nodeFetch = require("node-fetch");
+const fetch = require('node-fetch');
+//--------------
+
 
 export const connectWallet = async () => {
   if (window.ethereum) {
@@ -116,8 +121,32 @@ export const mintNFT = async (url, name, description) => {
   var str_serial_num = serial_num.toString();
   var part1_str_serial_num = "Zodiac Cards #"
 
+  //-----------------
+  //Algorithm to draw for JSON Server:
+  var base_string = 'https://zodiaccards-json-server.herokuapp.com/cards/'
+var card_no  = Math.floor(Math.random() * 216);
+console.log(card_no);
+var final_url_img = base_string.concat(card_no);
+console.log(final_url_img);
+    
+async function fetchData(){
+ let response = await fetch(final_url_img);
+ let data = await response.json();
+ data = JSON.stringify(data);
+ data = JSON.parse(data);
+ return data;
+}
+
+let json_ofCardtobeMinted = await fetchData(); // here the data will be return.
+console.log(json_ofCardtobeMinted); // you are using async await then no need of .then().
+
+let url_ofImg_ofCardtobeMinted = json_ofCardtobeMinted["Image IPFS"];
+console.log(url_ofImg_ofCardtobeMinted); 
+//------------------------
+
   metadata.name = part1_str_serial_num.concat(str_serial_num);;
-  metadata.image = image_array[Math.floor(Math.random() * 3)][Math.floor(Math.random() * 6)];
+  //metadata.image = image_array[Math.floor(Math.random() * 3)][Math.floor(Math.random() * 6)];
+  metadata.image = url_ofImg_ofCardtobeMinted;
   metadata.description = "20,000 Zodiac Cards are generated from 28 Million Combinations with Gold, Silver, and Bronze Rarities. Series 1 is the OG Zodiac Series.";
 
   console.log(metadata);
