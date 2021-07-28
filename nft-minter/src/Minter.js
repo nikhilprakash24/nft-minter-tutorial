@@ -77,11 +77,11 @@ const Minter = (props) => {
       </button>
 
       <br></br>
-      <h1 id="title">🧙‍♂️ Alchemy NFT Minter</h1>
-      <p>
+      <h1 id="title">🧙‍♂️ ZODIAC NFT Minter 🧙‍♂️</h1>
+      {/*<p>
         Simply add your asset's link, name, and description, then press "Mint."
       </p>
-      <form>
+       <form> 
         <h2>🖼 Link to asset: </h2>
         <input
           type="text"
@@ -100,7 +100,7 @@ const Minter = (props) => {
           placeholder="e.g. Even cooler than cryptokitties ;)"
           onChange={(event) => setDescription(event.target.value)}
         />
-      </form>
+      </form> */}
       <button id="mintButton" onClick={onMintPressed}>
         Mint NFT
       </button>

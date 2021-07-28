@@ -6,6 +6,7 @@ const contractAddress = "0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
+
 export const connectWallet = async () => {
   if (window.ethereum) {
     try {
@@ -89,7 +90,8 @@ async function loadContract() {
 }
 
 export const mintNFT = async (url, name, description) => {
-  if (url.trim() == "" || name.trim() == "" || description.trim() == "") {
+  //if (url.trim() == "" || name.trim() == "" || description.trim() == "") {
+  if (false) {
     return {
       success: false,
       status: "❗Please make sure all fields are completed before minting.",
@@ -97,10 +99,28 @@ export const mintNFT = async (url, name, description) => {
   }
 
   //make metadata
+  // const metadata = new Object();
+  // metadata.name = name;
+  // metadata.image = url;
+  // metadata.description = description;
+
+ // const image_array = ["https://gateway.pinata.cloud/ipfs/QmZsrtNMqJGeQKKWr4tk7SmYSUP51TfEA6w8uEtGy8UDeT/1-10/sheet%205/gold/3@4x-8.png", "https://gateway.pinata.cloud/ipfs/QmZsrtNMqJGeQKKWr4tk7SmYSUP51TfEA6w8uEtGy8UDeT/1-10/sheet%205/silver/3@4x-8.png", "https://gateway.pinata.cloud/ipfs/QmZsrtNMqJGeQKKWr4tk7SmYSUP51TfEA6w8uEtGy8UDeT/1-10/sheet%205/silver/3@4x-8.png","https://gateway.pinata.cloud/ipfs/QmZsrtNMqJGeQKKWr4tk7SmYSUP51TfEA6w8uEtGy8UDeT/1-10/sheet%205/bronze/3@4x-8.png","https://gateway.pinata.cloud/ipfs/QmZsrtNMqJGeQKKWr4tk7SmYSUP51TfEA6w8uEtGy8UDeT/1-10/sheet%205/bronze/3@4x-8.png","https://gateway.pinata.cloud/ipfs/QmZsrtNMqJGeQKKWr4tk7SmYSUP51TfEA6w8uEtGy8UDeT/1-10/sheet%205/bronze/3@4x-8.png"];
+  const image_array = [["https://gateway.pinata.cloud/ipfs/QmZitU94CUn4JyqVjx6AfnBMp5qrecLqH1kvei9sNvMxcz/7@4x.png", "https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/SIlver/4x/7@4x.png", "https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/SIlver/4x/7@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/7@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/7@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/7@4x.png"], ["https://gateway.pinata.cloud/ipfs/QmZitU94CUn4JyqVjx6AfnBMp5qrecLqH1kvei9sNvMxcz/9@4x.png", "https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/SIlver/4x/9@4x.png", "https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/SIlver/4x/9@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/9@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/9@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/9@4x.png"], ["https://gateway.pinata.cloud/ipfs/QmZitU94CUn4JyqVjx6AfnBMp5qrecLqH1kvei9sNvMxcz/11@4x.png", "https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/SIlver/4x/11@4x.png", "https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/SIlver/4x/11@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/11@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/11@4x.png","https://gateway.pinata.cloud/ipfs/QmVjKq7kWoSfR9eKwqQdCCX8L64rC2EzhKdicvRX2gD7Tc/Bronze/4x/11@4x.png"], ];
+
+  const name_array = ["Saab", "Volvo", "BMW"];
+
+
   const metadata = new Object();
-  metadata.name = name;
-  metadata.image = url;
-  metadata.description = description;
+  // metadata.name = "Zodiac Cards #12828";
+  var serial_num = [Math.floor(Math.random() * 20000)];
+  var str_serial_num = serial_num.toString();
+  var part1_str_serial_num = "Zodiac Cards #"
+
+  metadata.name = part1_str_serial_num.concat(str_serial_num);;
+  metadata.image = image_array[Math.floor(Math.random() * 3)][Math.floor(Math.random() * 6)];
+  metadata.description = "20,000 Zodiac Cards are generated from 28 Million Combinations with Gold, Silver, and Bronze Rarities. Series 1 is the OG Zodiac Series.";
+
+  console.log(metadata);
 
   const pinataResponse = await pinJSONToIPFS(metadata);
   if (!pinataResponse.success) {
