@@ -124,8 +124,8 @@ export const mintNFT = async (url, name, description) => {
   //-----------------
   //Algorithm to draw for JSON Server:
   // var base_string = 'https://zodiaccards-json-server.herokuapp.com/cards/'
-  var base_string = 'https://zodiaccards-images.herokuapp.com/cards/'
-var card_no  = Math.floor(Math.random() * 720);
+  var base_string = 'https://final-json.herokuapp.com/cards/'
+var card_no  = Math.floor(Math.random() * 3600);
 console.log(card_no);
 var final_url_img = base_string.concat(card_no);
 console.log(final_url_img);
